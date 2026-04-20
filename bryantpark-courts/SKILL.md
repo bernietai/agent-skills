@@ -1,13 +1,7 @@
 ---
 name: bryantpark-courts
 description: A court reservation task manager using bryantpark.opensquash.org/home on the browser. Curl commands are setup here to make direct calls to book courts 1,2,3,4 or 5 for a specific user ID
-metadata: {
-  "openclaw":{
-    "requires":{
-      "bin":["openclaw browser", "curl"]
-    }
-  }
-}  
+metadata: {"openclaw":{ "requires":{ "bin":["openclaw browser", "curl"]}}}  
 ---
 
 ## User ID
@@ -84,51 +78,52 @@ To reserve a court, make a POST request to https://bryantpark.opensquash.org/api
 
 ```
 {
-    "reservation":{
-        "date":"2026-04-12",
-        "hour_start":{timestamp_start}, 
-        "hour_end":{timestamp_end},
-        "reservation_type":2,
-        "public_game":false,
-        "min_ntrp":1,
-        "max_ntrp":7,
-        "kind":"reservation",
-        "ntrp_verified":false
-    },
+    "auto_fill_courts": true,
+    "free_fare_players": [],
+    "guest_pass_users": [],
     "payment":{
-        "method":"card",
-        "payment_intent_id":"",
         "card_details":{
-            "lastFourCardDigits":"4668",
-            "cardBrand":"Visa",
-            "id":830469
+            "cardBrand": "Visa",
+            "id": "830469",
+            "lastFourCardDigits": "4668"
         },
         "coupon":{
-          "code":""         
-	},
-        "moment":"now"
+          "code": ""        
+	    },
+        "method": "card",
+        "moment": "now",
+        "payment_intent_id": ""
     },
-    "user_ids":[ {user_id} ],
-    "user_excluded_ids":[],
+    "reservation":{
+        "date": "{date}",
+        "hour_start": {timestamp_start}, 
+        "hour_end": {timestamp_end},
+        "kind": "reservation",
+        "max_ntrp": 7,
+        "min_ntrp": 1,
+        "ntrp_verified": false,
+        "public_game": false,
+        "reservation_type": 2
+    },
+    "reservation_fees": [],
+    "user_excluded_ids": [],
+    "user_ids": [{user_id}],
     "user_ids_guest_names":{
         "player0":{
-            "name":null
+            "name": null
         }
     },
-    "reservation_fees":[],
     "users_fees":{
         "player0":{
-            "fees":[null]
+            "fees": [null]
         }
-    },
-    "auto_fill_courts":true,
-    "free_fare_players":[],
-    "guest_pass_users":[]
+    }
 }
 ```
 
-- timestamp_start and timestamp_end is a representation of the time in minutes from midnight. Examples: 62100 = 17.25 hrs = 5:15pm,  64800 = 18 hrs = 6pm 
-- user_id is fixed to "810533" 
+- {date} is set to 7 days from present day in "YYYY-MM-DD" format. 
+- {timestamp_start} and {timestamp_end} is a representation of the time in minutes from midnight. Examples: 62100 = 17.25 hrs = 5:15pm,  64800 = 18 hrs = 6pm 
+- user_id is fixed to 810533.
 - If user provides a time that is not available as booking slot, use the booking slot when the provided time falls on. eg for provided time 5:30pm, reserve the 5:15pm-6pm slot. 
 - In the POST request, include the following headers used in other GET and POST requests in https://bryantpark.opensquash.org/ while logged-in in  browser: 
   - "Cookie" header 
