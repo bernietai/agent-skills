@@ -1,5 +1,5 @@
 ---
-name: Second World Hello
+name: second-world-hello
 description: A second hello world skill that says hello.
 metadata: {"openclaw":{"requires":{"bin":[]}}}
 ---
