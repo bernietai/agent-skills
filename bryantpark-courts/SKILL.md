@@ -1,7 +1,13 @@
 ---
 name: bryantpark-courts
 description: A court reservation task manager using bryantpark.opensquash.org/home on the browser. Curl commands are setup here to make direct calls to book courts 1,2,3,4 or 5 for a specific user ID
-metadata: { "openclaw":{"requires":{"bin":["openclaw browser", "curl"] } } }  
+metadata: {
+  "openclaw":{
+    "requires":{
+      "bin":["openclaw browser", "curl"]
+    }
+  }
+}  
 ---
 
 ## User ID
@@ -34,14 +40,14 @@ There are 5 available courts, identified by the following identifiers:
 	- 1115am-1200pm
 	- 1200pm-1245pm
 	- 1245pm-130pm
-        - 130pm-215pm
-        - 215pm-300pm
-        - 300pm-345pm
-        - 345pm-430pm
-        - 430pm-515pm
-        - 515pm-600pm
-        - 600pm-645pm
-        - 645pm-730pm
+    - 130pm-215pm
+    - 215pm-300pm
+    - 300pm-345pm
+    - 345pm-430pm
+    - 430pm-515pm
+    - 515pm-600pm
+    - 600pm-645pm
+    - 645pm-730pm
 - As a guide, weekday slots:
 	- 600am-645am
 	- 645am-730am
@@ -51,26 +57,26 @@ There are 5 available courts, identified by the following identifiers:
 	- 945am-1030am
 	- 1030am-1115am
 	- 1115am-1200pm 
-        - 1200pm-1245pm
-        - 1245pm-130pm
-        - 130pm-215pm
-        - 215pm-300pm
-        - 300pm-345pm
-        - 345pm-430pm
-        - 430pm-515pm
-        - 515pm-600pm
-        - 600pm-645pm
-        - 645pm-730pm
-        - 730pm-815pm
-        - 815pm-900pm
-        - 900pm-945pm
-        - 945pm-1030pm 
+    - 1200pm-1245pm
+    - 1245pm-130pm
+    - 130pm-215pm
+    - 215pm-300pm
+    - 300pm-345pm
+    - 345pm-430pm
+    - 430pm-515pm
+    - 515pm-600pm
+    - 600pm-645pm
+    - 645pm-730pm
+    - 730pm-815pm
+    - 815pm-900pm
+    - 900pm-945pm
+    - 945pm-1030pm 
 - To lookup available court reservations, make a GET request to https://bryantpark.opensquash.org/api/facilities/645/available_courts with the following parameters: 
-	- date - set to timestamp of midnight UTC of the date provided by user eg "1775534400" = Tue Apr 7  
-	- surface - set to "squash" 
-	- start_hour - select start time from available slot times depending whether date provided by user is a weekday or weekend
-	- hour_end - select end time from available slot times depending whether date provided by user is a weekday or weekend. 
-	- kind - set to "reservation" 
+- date - set to timestamp of midnight UTC of the date provided by user eg "1775534400" = Tue Apr 7  
+- surface - set to "squash" 
+- start_hour - select start time from available slot times depending whether date provided by user is a weekday or weekend
+- hour_end - select end time from available slot times depending whether date provided by user is a weekday or weekend. 
+- kind - set to "reservation" 
 
 ## Court reservation rules 
 
@@ -125,5 +131,5 @@ To reserve a court, make a POST request to https://bryantpark.opensquash.org/api
 - user_id is fixed to "810533" 
 - If user provides a time that is not available as booking slot, use the booking slot when the provided time falls on. eg for provided time 5:30pm, reserve the 5:15pm-6pm slot. 
 - In the POST request, include the following headers used in other GET and POST requests in https://bryantpark.opensquash.org/ while logged-in in  browser: 
-  - "Cookie" header 
-  - "X-Csrf-Token" header 
+  1. "Cookie" header 
+  2. "X-Csrf-Token" header 
