@@ -1,15 +1,8 @@
 ---
 name: bryantpark-courts
 description: A court reservation task manager using bryantpark.opensquash.org/home on the browser. Curl commands are setup here to make direct calls to book courts 1,2,3,4 or 5 for a specific user ID
-metadata: {
-  "openclaw":{
-    "requires":{
-      "bin":["openclaw browser", "curl"]
-    }
-  }
-}  
+metadata: { "openclaw": { "requires": { "bins": ["openclaw", "curl"] } } }
 ---
-
 ## User ID
 
 This court reservation task manager is for user ID 810533 only. 
@@ -121,7 +114,7 @@ To reserve a court, make a POST request to https://bryantpark.opensquash.org/api
             "fees":[null]
         }
     },
-    "auto_fill_courts":true,
+    "auto_fill_courts":false,
     "free_fare_players":[],
     "guest_pass_users":[]
 }
