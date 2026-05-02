@@ -24,6 +24,7 @@ There are 5 available courts, identified by the following identifiers:
 ## Lookup available court reservations
 
 - When setting start_hour or hour_end, use Open Squash's representation of the time in minutes from midnight. Examples: 62100 = 17.25 hrs = 5:15pm
+- Important: the `date` parameter must align with the same **local calendar day** as those slot times. Do not convert the requested date to midnight UTC first.
 - For any single time given by the user, always look for court reservations that starts before and ends after that time. 
 - As a guide, Sat and Sun slots:
 	- 815am-900am
@@ -65,7 +66,7 @@ There are 5 available courts, identified by the following identifiers:
     - 900pm-945pm
     - 945pm-1030pm 
 - To lookup available court reservations, make a GET request to https://bryantpark.opensquash.org/api/facilities/645/available_courts with the following parameters: 
-- date - set to timestamp of midnight UTC of the date provided by user eg "1775534400" = Tue Apr 7  
+- date - set to the timestamp for **midnight in the facility's local timezone** on the requested date (not midnight UTC). For Bryant Park / America/New_York during EDT, local midnight is 04:00 UTC. Example: `1778299200` corresponds to **2026-05-09 00:00 America/New_York**.
 - surface - set to "squash" 
 - start_hour - select start time from available slot times depending whether date provided by user is a weekday or weekend
 - hour_end - select end time from available slot times depending whether date provided by user is a weekday or weekend. 
