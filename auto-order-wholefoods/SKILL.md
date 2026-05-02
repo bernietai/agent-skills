@@ -37,4 +37,27 @@ Proceed to the next store and repeat the checkout process only for Stores where 
 
 # After Checkout Completion
 
-After order is complete, remove items that were successfully ordered from the running list in the current channel. 
+After order is complete, remove items that were successfully ordered from the running list in the current channel.
+
+
+# Workflow discipline
+
+Use this skill as the source of truth before opening the browser. Convert the skill into a short step checklist and work through it in order. Do not improvise additional shopping behavior unless the user explicitly asks.
+
+Recommended execution order:
+1. Confirm active Whole Foods/Amazon browser session.
+2. Read the running list in the current channel and identify items assigned to Whole Foods.
+3. Search and add only those items, defaulting quantity to 1 when unspecified.
+4. Verify cart contents match intended items before checkout.
+5. Check delivery-fee / free-delivery threshold status.
+6. Go to cart and click "Checkout On Amazon".
+7. If `/alm/byg/` appears, click "Continue" only. Do not add suggested extras.
+8. If `/alm/substitution/` appears, click "Continue" unless the user gave substitution preferences.
+9. Stop and ask for approval before clicking the final order-placement button, unless the user has already explicitly approved placing the order anyway.
+10. After successful order completion, remove only fulfilled Whole Foods items from the running list.
+
+# Known edge cases
+
+- Whole Foods search result clicks can hit the wrong container. Re-verify cart contents after each important add.
+- A cart can be above the grocery-subscription free-delivery threshold while the currently selected delivery window still has a paid fee. Check the actual checkout page, not just subtotal.
+- The final Amazon checkout page may expose multiple "Place your order" buttons in the DOM. Verify you are on the real checkout page before clicking.
