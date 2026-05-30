@@ -1,7 +1,7 @@
 ---
 name: auto-order-instacart
 description: From a running list of items, automatically place an order on Instacart for pickup or delivery.
-metadata: { "openclaw": { "requires": { "bins": ["curl"] } } }
+metadata: { "openclaw": { "requires": { "bins": ["curl", "openclaw"] } } }
 ---
 # Active session required
 
