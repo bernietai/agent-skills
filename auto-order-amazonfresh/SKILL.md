@@ -98,11 +98,11 @@ Ask for approval in the current session or channel before placing the order. If 
 # After Checkout Completion
 
 After the order is complete:
-- remove only items that were successfully ordered from the running list in the current channel
-- keep not-found items in the running list
-- keep declined substitutions out of completed items
-- report the final order confirmation details back in the current session or channel
-- Immediately set up a "order status check" cron task to check order status every 30 minutes until order is delivered.
+- Remove only items that were successfully ordered from the running list in the current channel
+- Keep not-found items in the running list
+- Keep declined substitutions out of completed items
+- Report the final order confirmation details, including order ID and order total.
+- Immediately set up a "order status check" cron task to check order status on URL https://www.amazon.com/uff/your-account/order-details/?orderID={orderId} every 30 minutes until order is delivered. 
 - During each order status check run, do not send message to channel unless there is an order status change.
 - If order status indicates order is delivered, send message to channel to notify user of order arrival.
 - If order status indicated order is delayed, send message to channel to notify user of order delay.  
