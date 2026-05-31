@@ -1,7 +1,7 @@
 ---
 name: auto-order-instacart
 description: From a running list of items, automatically place an order on Instacart for pickup or delivery.
-metadata: { "openclaw": { "requires": { "bins": ["curl"] } } }
+metadata: { "openclaw": { "requires": { "bins": ["curl", "openclaw"] } } }
 ---
 # Active session required
 
@@ -101,8 +101,12 @@ Proceed to the next store and repeat the checkout process only for stores where 
 
 # After Checkout Completion
 
-After the order is complete:
 - remove only items that were successfully ordered from the running list in the current channel
 - keep not-found items in the running list
 - keep declined substitutions out of completed items
 - report the final order confirmation details back in the current session or channel
+- Immediately set up a "order status check" cron task to check Instacart order status on https://www.instacart.com/store/orders/{orderId} every 10 minutes. 
+- During each order status check run, if there is no change to order status and order remains in progress, do not send message to channel and do not notify user. 
+- If order status indicates order is delivered, send message to notify user of order arrival. 
+- If order status indicated order is delayed, send message to notify user of order delay.  
+- After Instacart order is delivered, archive or delete "order status check" cron task 
