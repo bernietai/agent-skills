@@ -106,7 +106,7 @@ Proceed to the next store and repeat the checkout process only for stores where 
 - keep declined substitutions out of completed items
 - report the final order confirmation details back in the current session or channel
 - Immediately set up a "order status check" cron task to check Instacart order status on https://www.instacart.com/store/orders/{orderId} every 10 minutes. 
-- During each order status check run, do not send message unless there is an order status change. 
+- During each order status check run, if there is an order status change, do not send any message to channel and do not notify user. 
 - If order status indicates order is delivered, send message to notify user of order arrival. 
 - If order status indicated order is delayed, send message to notify user of order delay.  
 - After Instacart order is delivered, archive or delete "order status check" cron task 
